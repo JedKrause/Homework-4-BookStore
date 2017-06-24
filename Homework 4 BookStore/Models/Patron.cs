@@ -22,6 +22,11 @@ namespace Homework_4_BookStore.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode = true)]
         [Display(Name ="Membership Date")]
         public DateTime MembershipDate { get; set; }
+        [Display(Name = "Permissions Level")]
+        [Required]
+        public int PermissionsLevel { get; set; }
+        [Required]
+        public string Password { get; set; }
         public string FullName
         {
             get { return LastName + ", " + FirstName; }

@@ -8,8 +8,8 @@ using Homework_4_BookStore.Data;
 namespace Homework4BookStore.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20170624175629_Initial")]
-    partial class Initial
+    [Migration("20170624184643_BookPrices")]
+    partial class BookPrices
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,8 @@ namespace Homework4BookStore.Migrations
                     b.Property<string>("Genre")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<decimal>("Price");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -48,6 +50,11 @@ namespace Homework4BookStore.Migrations
                         .HasMaxLength(30);
 
                     b.Property<DateTime>("MembershipDate");
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<int>("PermissionsLevel");
 
                     b.HasKey("PatronID");
 

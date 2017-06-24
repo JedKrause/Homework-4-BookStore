@@ -18,6 +18,8 @@ namespace Homework_4_BookStore.Models
         [Required]
         public string Genre { get; set; }
 
+        public decimal Price { get; set; }
+
         public ICollection<Rental> Rentals { get; set; }
     }
 }

@@ -18,14 +18,15 @@ namespace Homework_4_BookStore.Data
             }
             var patrons = new Patron[]
             {
-                 new Patron{FirstName="Jed",LastName="Krause",MembershipDate=DateTime.Parse("2015-09-01")},
-                 new Patron{FirstName="Daniel",LastName="Boon",MembershipDate=DateTime.Parse("2012-09-01")},
-                 new Patron{FirstName="Frank",LastName="Sinatra",MembershipDate=DateTime.Parse("2013-09-01")},
-                 new Patron{FirstName="Paul",LastName="Krause",MembershipDate=DateTime.Parse("2012-09-01")},
-                 new Patron{FirstName="Joey",LastName="Wheeler",MembershipDate=DateTime.Parse("2012-09-01")},
-                 new Patron{FirstName="Ashley",LastName="Williams",MembershipDate=DateTime.Parse("2011-09-01")},
-                 new Patron{FirstName="Steve",LastName="Young",MembershipDate=DateTime.Parse("2013-09-01")},
-                 new Patron{FirstName="Bob",LastName="Smith",MembershipDate=DateTime.Parse("2015-09-01")}
+                 new Patron{FirstName="Jed",LastName="Krause",MembershipDate=DateTime.Parse("2015-09-01"),PermissionsLevel=4,Password="1234"},
+                 new Patron{FirstName="Daniel",LastName="Boon",MembershipDate=DateTime.Parse("2012-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Frank",LastName="Sinatra",MembershipDate=DateTime.Parse("2013-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Paul",LastName="Krause",MembershipDate=DateTime.Parse("2012-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Joey",LastName="Wheeler",MembershipDate=DateTime.Parse("2012-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Ashley",LastName="Williams",MembershipDate=DateTime.Parse("2011-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Steve",LastName="Young",MembershipDate=DateTime.Parse("2013-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Bob",LastName="Smith",MembershipDate=DateTime.Parse("2015-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Rich",LastName="Fry",MembershipDate=DateTime.Parse("2017-06-20"),PermissionsLevel=4,Password="1234"}
             };
             foreach (Patron p in patrons)
             {
@@ -34,11 +35,11 @@ namespace Homework_4_BookStore.Data
             context.SaveChanges();
             var books = new Book[]
             {
-                 new Book{BookID=1234,Title="The Hobbit",Genre="Fantasy"},
-                 new Book{BookID=5678,Title="The Fellowship of the Ring",Genre="Fantasy"},
-                 new Book{BookID=9101,Title="The Two Towers",Genre="Fantasy"},
-                 new Book{BookID=1121,Title="The Retun of the King",Genre="Fantasy"},
-                 new Book{BookID=3141,Title="Silmarillion",Genre="Fantasy"},
+                 new Book{BookID=1234,Title="The Hobbit",Genre="Fantasy",Price=9.99M},
+                 new Book{BookID=5678,Title="The Fellowship of the Ring",Genre="Fantasy",Price=9.99M},
+                 new Book{BookID=9101,Title="The Two Towers",Genre="Fantasy",Price=9.99M},
+                 new Book{BookID=1121,Title="The Retun of the King",Genre="Fantasy",Price=9.99M},
+                 new Book{BookID=3141,Title="Silmarillion",Genre="Fantasy",Price=9.99M},
             };
             foreach (Book b in books)
             {

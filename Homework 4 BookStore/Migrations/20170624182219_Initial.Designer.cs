@@ -8,9 +8,10 @@ using Homework_4_BookStore.Data;
 namespace Homework4BookStore.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20170624182219_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -23,8 +24,6 @@ namespace Homework4BookStore.Migrations
                     b.Property<string>("Genre")
                         .IsRequired()
                         .HasMaxLength(50);
-
-                    b.Property<decimal>("Price");
 
                     b.Property<string>("Title")
                         .IsRequired()

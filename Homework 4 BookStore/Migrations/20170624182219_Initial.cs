@@ -30,7 +30,9 @@ namespace Homework4BookStore.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FirstName = table.Column<string>(maxLength: 30, nullable: false),
                     LastName = table.Column<string>(maxLength: 30, nullable: false),
-                    MembershipDate = table.Column<DateTime>(nullable: false)
+                    MembershipDate = table.Column<DateTime>(nullable: false),
+                    Password = table.Column<string>(nullable: false),
+                    PermissionsLevel = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

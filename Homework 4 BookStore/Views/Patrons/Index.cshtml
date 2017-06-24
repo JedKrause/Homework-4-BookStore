@@ -30,6 +30,12 @@
                 <th>
                     <a asp-action="Index" asp-route-sortOrder=@ViewData["DateSortParm"] asp-route-currentFilter=@ViewData["CurrentFilter"]>Membership Date</a>
                 </th>
+            <th>
+                Permission Level
+            </th>
+            <th>
+                Password
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -44,6 +50,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.MembershipDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PermissionsLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PatronID">Edit</a> |
