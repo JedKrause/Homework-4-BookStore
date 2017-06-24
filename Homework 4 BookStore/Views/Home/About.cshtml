@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Homework_4_BookStore.Models.ViewModels.RentalCountGroup>
+@{
+    ViewData["Title"] = "Rental Count Statistics";
+}
+<h2>Rental Count Statistics</h2>
+<table>
+    <tr>
+        <th>
+            Book Id
+        </th>
+        <th>
+            Rentals
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookID)
+            </td>
+            <td>
+                @item.RentalID
+            </td>
+        </tr>
+    }
+</table>
