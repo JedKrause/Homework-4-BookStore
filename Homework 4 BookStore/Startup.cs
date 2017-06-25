@@ -56,7 +56,7 @@ namespace Homework_4_BookStore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Shop}/{action=Home}/{id?}");
             });
 
             DbInitializer.Initilize(context);
