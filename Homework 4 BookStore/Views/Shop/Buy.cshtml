@@ -1,4 +1,4 @@
-@model IEnumerable<Homework_4_BookStore.Models.Book>
+@model PaginatedList<Homework_4_BookStore.Models.Book>
 @using Microsoft.AspNetCore.Http;
    
 @{
@@ -9,20 +9,29 @@
     {
         <h2>Welcome @Context.Session.GetString("Username")</h2>
 
-    <p>       
-    </p>
+        <form asp-action="Buy" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Find by name or genre: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-default" /> |
+                    <a asp-action="Buy">Back to Full List</a>
+                </p>
+            </div>
+        </form>
     <table class="table">
         <thead>
             <tr>
+                <th></th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    <a asp-action="Buy" asp-route-sortOrder=@ViewData["NameSortParm"] asp-route-currentFilter=@ViewData["CurrentFilter"]>Title</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Genre)
+                    <a asp-action="Buy" asp-route-sortOrder=@ViewData["GenreSortParm"] asp-route-currentFilter=@ViewData["CurrentFilter"]>Genre</a>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
+                    Price
                 </th>
+                
                 <th></th>
             </tr>
         </thead>
@@ -30,9 +39,9 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    @*<td>
-                        <img src="~/images/"@Html.DisplayFor(modelItem => item.Path)  />
-                    </td>*@
+                    <td>
+                        <img src="~/images/@item.Path" alt="" />
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
@@ -43,12 +52,26 @@
                         @Html.DisplayFor(modelItem => item.Price)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.BookID">Details</a>
+                        <a asp-action="BookDetail" asp-route-id="@item.BookID">Details</a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+
+        <a asp-action="Buy"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.PageIndex -1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default @prevDisabled btn">Previous</a>
+
+            <a asp-action="Buy"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@(Model.PageIndex +1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled btn">Next</a>
     }
     else
     {

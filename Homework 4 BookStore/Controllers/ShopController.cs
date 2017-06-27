@@ -27,9 +27,64 @@ namespace Homework_4_BookStore.Controllers
         }
 
         //Get: Buy
-        public async Task<IActionResult> Buy()
+        public async Task<IActionResult> Buy(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            return View(await _context.Books.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["GenreSortParm"] = sortOrder == "Genre" ? "genre_desc" : "Genre";
+            ViewData["CurrentFilter"] = searchString;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            var books = from b in _context.Books
+                         select b;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(b => b.Title.Contains(searchString)
+                || b.Genre.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    books = books.OrderByDescending(b => b.Title);
+                    break;
+                case "Genre":
+                    books = books.OrderBy(s => s.Genre);
+                    break;
+                case "genre_desc":
+                    books = books.OrderByDescending(s => s.Genre);
+                    break;
+                default:
+                    books = books.OrderBy(s => s.Title);
+                    break;
+            }
+            int pageSize = 3;
+            return View(await PaginatedList<Book>.CreateAsync(books.AsNoTracking(), page ?? 1, pageSize));
+            //return View(await _context.Books.ToListAsync());
+        }
+        //Get: Details
+        public async Task<IActionResult> BookDetail(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var book = await _context.Books
+                .SingleOrDefaultAsync(m => m.BookID == id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
         }
 
         public IActionResult Cart()

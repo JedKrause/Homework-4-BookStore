@@ -35,11 +35,11 @@ namespace Homework_4_BookStore.Data
             context.SaveChanges();
             var books = new Book[]
             {
-                 new Book{BookID=1234,Title="The Hobbit",Genre="Fantasy",Price=9.99M},
-                 new Book{BookID=5678,Title="The Fellowship of the Ring",Genre="Fantasy",Price=9.99M},
-                 new Book{BookID=9101,Title="The Two Towers",Genre="Fantasy",Price=9.99M},
-                 new Book{BookID=1121,Title="The Retun of the King",Genre="Fantasy",Price=9.99M},
-                 new Book{BookID=3141,Title="Silmarillion",Genre="Fantasy",Price=9.99M},
+                 new Book{BookID=1234,Title="The Hobbit",Genre="Fantasy",Price=9.99M,Path="thehob.jpg"},
+                 new Book{BookID=5678,Title="The Fellowship of the Ring",Genre="Fantasy",Price=9.99M,Path="fotr.jpg"},
+                 new Book{BookID=9101,Title="The Two Towers",Genre="Fantasy",Price=9.99M,Path="ttt.jpg"},
+                 new Book{BookID=1121,Title="The Retun of the King",Genre="Fantasy",Price=9.99M,Path="rotk.jpg"},
+                 new Book{BookID=3141,Title="Silmarillion",Genre="Fantasy",Price=9.99M,Path="thesil.jpg"},
             };
             foreach (Book b in books)
             {

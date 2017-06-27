@@ -8,9 +8,10 @@ using Homework_4_BookStore.Data;
 namespace Homework4BookStore.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    partial class LibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20170627222134_BookPhotoPath")]
+    partial class BookPhotoPath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

@@ -1,3 +1,4 @@
+@model Homework_4_BookStore.Models.Book
 
 @{
     ViewData["Title"] = "BookDetail";
@@ -6,3 +7,35 @@
 
 <h2>BookDetail</h2>
 
+<hr />
+<dl class="dl-horizontal">
+    <dt></dt>
+    <dd>
+        <img src="~/images/@Html.DisplayFor(model => model.Path)" alt="No photo" />
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Title)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Title)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Genre)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Genre)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Price)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Price)
+    </dd>
+  </dl>
+<div>
+    <ul>
+    <li class="btn btn-primary"><a asp-area="" asp-controller="Shop" asp-action="AddToCart" style="color:white">Add To Cart</a></li>
+    |
+    <li class="btn btn-primary"><a asp-area="" asp-controller="Shop" asp-action="Buy" style="color:white">Back to List</a></li>
+</ul>
+</div>

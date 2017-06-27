@@ -20,6 +20,8 @@ namespace Homework_4_BookStore.Models
 
         public decimal Price { get; set; }
 
+        public string Path { get; set; }
+
         public ICollection<Rental> Rentals { get; set; }
     }
 }
