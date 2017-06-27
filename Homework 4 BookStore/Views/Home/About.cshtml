@@ -1,26 +1,36 @@
 ﻿@model IEnumerable<Homework_4_BookStore.Models.ViewModels.RentalCountGroup>
+@using Microsoft.AspNetCore.Http;
+
 @{
     ViewData["Title"] = "Rental Count Statistics";
-}
-<h2>Rental Count Statistics</h2>
-<table>
-    <tr>
-        <th>
-            Book Id
-        </th>
-        <th>
-            Rentals
-        </th>
-    </tr>
-    @foreach (var item in Model)
+    if (Context.Session.GetString("ValidUser") == "true")
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookID)
-            </td>
-            <td>
-                @item.RentalID
-            </td>
-        </tr>
+        <h2>Rental Count Statistics</h2>
+        <table>
+            <tr>
+                <th>
+                    Book Id
+                </th>
+                <th>
+                    Rentals
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookID)
+                    </td>
+                    <td>
+                        @item.RentalID
+                    </td>
+                </tr>
+            }
+        </table>
     }
-</table>
+    else
+    {
+        <h1>Invalid Login</h1>
+        <li class="btn btn-primary"><a asp-area="" asp-controller="Shop" asp-action="Login" style="color:white">Return to Login</a></li>
+    }
+}

@@ -1,47 +1,57 @@
 @model IEnumerable<Homework_4_BookStore.Models.Rental>
-
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Index";
+    if (Context.Session.GetString("ValidUser") == "true")
+    {
+        <h2>Index</h2>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DueDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patron)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DueDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Book.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Patron.FullName)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.RentalID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.RentalID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.RentalID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1>Invalid Login</h1>
+        <li class="btn btn-primary"><a asp-area="" asp-controller="Shop" asp-action="Login" style="color:white">Return to Login</a></li>
+    }
 }
 
-<h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.DueDate)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Book)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Patron)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Book.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patron.FullName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RentalID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RentalID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RentalID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>

@@ -1,85 +1,95 @@
 @model PaginatedList<Homework_4_BookStore.Models.Patron>
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "Index";
-}
+    if (Context.Session.GetString("ValidUser") == "true")
+    {
 
-<h2>Index</h2>
+        <h2>Index</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<form asp-action="Index" method="get">
-    <div class="form-actions no-color">
         <p>
-            Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            <a asp-action="Create">Create New</a>
         </p>
-    </div>
-</form>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    <a asp-action="Index" asp-route-sortOrder=@ViewData["NameSortParm"] asp-route-currentFilter=@ViewData["CurrentFilter"]>Last Name</a>
-                </th>
-                <th>
-                    FirstName
-                </th>
-                <th>
-                    <a asp-action="Index" asp-route-sortOrder=@ViewData["DateSortParm"] asp-route-currentFilter=@ViewData["CurrentFilter"]>Membership Date</a>
-                </th>
-            <th>
-                Permission Level
-            </th>
-            <th>
-                Password
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MembershipDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PermissionsLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PatronID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PatronID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PatronID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-@{
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-default" /> |
+                    <a asp-action="Index">Back to Full List</a>
+                </p>
+            </div>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        <a asp-action="Index" asp-route-sortOrder=@ViewData["NameSortParm"] asp-route-currentFilter=@ViewData["CurrentFilter"]>Last Name</a>
+                    </th>
+                    <th>
+                        FirstName
+                    </th>
+                    <th>
+                        <a asp-action="Index" asp-route-sortOrder=@ViewData["DateSortParm"] asp-route-currentFilter=@ViewData["CurrentFilter"]>Membership Date</a>
+                    </th>
+                    <th>
+                        Permission Level
+                    </th>
+                    <th>
+                        Password
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MembershipDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PermissionsLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.PatronID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.PatronID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.PatronID">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
 
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-page="@(Model.PageIndex -1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-default @prevDisabled btn">Previous</a>
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@(Model.PageIndex -1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @prevDisabled btn">Previous</a>
 
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-page="@(Model.PageIndex +1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-default @nextDisabled btn">Next</a>
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@(Model.PageIndex +1)"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-default @nextDisabled btn">Next</a>
+        
+            }
+            else
+            {
+        <h1>Invalid Login</h1>
+        <li class="btn btn-primary"><a asp-area="" asp-controller="Shop" asp-action="Login" style="color:white">Return to Login</a></li>
+    }
 }

@@ -1,8 +1,18 @@
+@using Microsoft.AspNetCore.Http;
 
 @{
     ViewData["Title"] = "checkout";
     Layout = "/Views/Shop/_ShopLayout.cshtml";
+    if (Context.Session.GetString("ValidUser") == "true")
+    {
+        <h2>checkout</h2>
+
+    }
+    else
+    {
+        <h1>Invalid Login</h1>
+        <li class="btn btn-primary"><a asp-area="" asp-controller="Shop" asp-action="Login" style="color:white">Return to Login</a></li>
+    }
 }
 
-<h2>checkout</h2>
 

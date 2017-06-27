@@ -21,7 +21,7 @@ namespace Homework_4_BookStore.Data
                  new Patron{FirstName="Jed",LastName="Krause",MembershipDate=DateTime.Parse("2015-09-01"),PermissionsLevel=4,Password="1234"},
                  new Patron{FirstName="Daniel",LastName="Boon",MembershipDate=DateTime.Parse("2012-09-01"),PermissionsLevel=1,Password="1234"},
                  new Patron{FirstName="Frank",LastName="Sinatra",MembershipDate=DateTime.Parse("2013-09-01"),PermissionsLevel=1,Password="1234"},
-                 new Patron{FirstName="Paul",LastName="Krause",MembershipDate=DateTime.Parse("2012-09-01"),PermissionsLevel=1,Password="1234"},
+                 new Patron{FirstName="Paul",LastName="Krause",MembershipDate=DateTime.Parse("2012-09-01"),PermissionsLevel=1,Password="abc"},
                  new Patron{FirstName="Joey",LastName="Wheeler",MembershipDate=DateTime.Parse("2012-09-01"),PermissionsLevel=1,Password="1234"},
                  new Patron{FirstName="Ashley",LastName="Williams",MembershipDate=DateTime.Parse("2011-09-01"),PermissionsLevel=1,Password="1234"},
                  new Patron{FirstName="Steve",LastName="Young",MembershipDate=DateTime.Parse("2013-09-01"),PermissionsLevel=1,Password="1234"},

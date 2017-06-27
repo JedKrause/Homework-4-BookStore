@@ -126,7 +126,7 @@ namespace Homework_4_BookStore.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PatronID,LastName,FirstName,MembershipDate,PermissionLevel,Password")] Patron patron)
+        public async Task<IActionResult> Edit(int id, [Bind("PatronID,LastName,FirstName,MembershipDate,PermissionsLevel,Password")] Patron patron)
         {
             if (id != patron.PatronID)
             {

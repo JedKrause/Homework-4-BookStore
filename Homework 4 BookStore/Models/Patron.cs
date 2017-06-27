@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Homework_4_BookStore.Models
 {
@@ -33,6 +35,42 @@ namespace Homework_4_BookStore.Models
 
         }
 
+        //public Patron GetPatron(string _username, string _password)
+        //{
+
+        //    using (var cn = new SqlConnection(@"Server=(localdb)\\mssqllocaldb;Database=Homework_4_BookStore;Trusted_Connection=True;MultipleActiveResultSets=true"))
+        //    {
+        //        string _sql = @"SELECT * FROM [dbo].[Patron] " +
+        //               @"WHERE [LastName] = @u AND [Password] = @p";
+        //        var cmd = new SqlCommand(_sql, cn);
+        //        cmd.Parameters
+        //            .Add(new SqlParameter("@u", SqlDbType.NVarChar))
+        //            .Value = _username;
+        //        cmd.Parameters
+        //            .Add(new SqlParameter("@p", SqlDbType.NVarChar))
+        //            .Value = _password;
+        //        cn.Open();
+        //        var reader = cmd.ExecuteReader();
+        //        if (reader.HasRows)
+        //        {
+        //            Patron patron = new Patron();
+        //            patron.PatronID = reader.GetInt32(0);
+        //            patron.FirstName = reader.GetString(1);
+        //            patron.LastName = reader.GetString(2);
+        //            patron.PermissionsLevel = reader.GetInt32(5);
+
+        //            cmd.Dispose();
+        //            return patron;
+        //        }
+        //        else
+        //        {
+        //            Patron empty = new Patron();
+        //            reader.Dispose();
+        //            cmd.Dispose();
+        //            return empty;
+        //        }
+        //    }
+        //}
         public ICollection<Rental> Rentals { get; set; }
     }
 }

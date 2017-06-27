@@ -1,3 +1,4 @@
+@model Homework_4_BookStore.Models.Patron
 
 @{
     ViewData["Title"] = "Login";
@@ -5,4 +6,59 @@
 }
 
 <h2>Login</h2>
+
+<form asp-action="Login">
+    <div class="form-horizontal">
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="LastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        @*<div class="form-group">
+                <label asp-for="MembershipDate" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="MembershipDate" class="form-control" />
+                    <span asp-validation-for="MembershipDate" class="text-danger"></span>
+                </div>
+            </div>*@
+        @*<div class="form-group">
+            <label asp-for="PermissionsLevel" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="PermissionsLevel" class="form-control" />
+                <span asp-validation-for="PermissionsLevel" class="text-danger"></span>
+            </div>*@
+        <div class="form-group">
+            <label asp-for="Password" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Home">Back to Home</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
 
