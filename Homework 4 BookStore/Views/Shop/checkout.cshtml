@@ -1,12 +1,61 @@
 @using Microsoft.AspNetCore.Http;
+@model IEnumerable<Homework_4_BookStore.Models.ShoppingCart>
 
 @{
     ViewData["Title"] = "checkout";
     Layout = "/Views/Shop/_ShopLayout.cshtml";
+    decimal subtotal = 0.0m;
     if (Context.Session.GetString("ValidUser") == "true")
     {
         <h2>checkout</h2>
+        <ul >
+            <li class="btn btn-primary"><a asp-area="" asp-controller="Shop" asp-action="Confirmation" style="color:white">Confirm Purchase</a></li>
 
+        </ul>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Qty)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                        <th>
+                            Total Price
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Qty)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+
+                            <td>
+                                @((item.Price) * (item.Qty))
+                                @{subtotal += ((item.Price) * (item.Qty));}
+                            </td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <p style="float:right">SubTotal = @subtotal</p>
     }
     else
     {

@@ -79,6 +79,7 @@ namespace Homework_4_BookStore.Controllers
 
             var book = await _context.Books
                 .SingleOrDefaultAsync(m => m.BookID == id);
+            HttpContext.Session.SetString("CartBookTitle", book.Title);
             if (book == null)
             {
                 return NotFound();
@@ -97,12 +98,87 @@ namespace Homework_4_BookStore.Controllers
 
             //ShoppingCart shoppingcart[] = await _context.ShoppingCarts
             //    .Select(sc => sc.PatronID == id);
-            return View(await _context.ShoppingCarts.ToListAsync());
+            return View( _context.ShoppingCarts.Where(t => t.PatronID.Equals(HttpContext.Session.GetInt32("PatronID"))));
+            //return View(await _context.ShoppingCarts.ToListAsync());
         }
+
+        public async Task<IActionResult> AddToCart()
+        {
+
+            string id2 = HttpContext.Session.GetString("CartBookTitle");
+            var book = await _context.Books.SingleOrDefaultAsync(m => m.Title == id2);
+            ShoppingCart Cart = new ShoppingCart();
+            var bookID = book.BookID;
+            Cart.BookID = book.BookID;
+            Cart.Price = book.Price;
+            Cart.Title = book.Title;
+            Cart.Qty = 1;
+            Cart.Path = book.Path;
+            Cart.PatronID = HttpContext.Session.GetInt32("PatronID") ?? default(int);
+            if (ModelState.IsValid)
+            {
+                _context.Add(Cart);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Cart");
+            }
+            return RedirectToAction("Error");
+        }
+
+        public async Task<IActionResult> RemoveFromCart(int id)
+        {
+            var cart = await _context.ShoppingCarts.SingleOrDefaultAsync(m => m.ID == id);
+            _context.ShoppingCarts.Remove(cart);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Cart");
+        }
+
+        [HttpPost, ActionName("RemoveFromCart")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveFromCart2(int id)
+        {
+            var cart = await _context.ShoppingCarts.SingleOrDefaultAsync(m => m.ID == id);
+            _context.ShoppingCarts.Remove(cart);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        private bool BookExists(int id)
+        {
+            return _context.Books.Any(e => e.BookID == id);
+        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[ActionName("AddToCartPost")]
+        //public async Task<IActionResult> AddToCart2()
+        //{
+        //    int? id1 = HttpContext.Session.GetInt32("CartBookId");
+        //    int id2 = id1 ?? default(int);
+        //    var book = await _context.Books.SingleOrDefaultAsync(m => m.BookID == id2);
+        //    ShoppingCart Cart = new ShoppingCart();
+        //    Cart.BookID = book.BookID;
+        //    Cart.Price = book.Price;
+        //    Cart.Title = book.Title;
+        //    Cart.Qty = 1;
+        //    Cart.Path = book.Path;
+        //    Cart.PatronID = HttpContext.Session.GetInt32("PatronId") ?? default(int);
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(Cart);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction("Cart");
+        //    }
+        //    return RedirectToAction("Error");
+        //}
 
         public IActionResult Checkout()
         {
-            return View();
+            return View(_context.ShoppingCarts.Where(t => t.PatronID.Equals(HttpContext.Session.GetInt32("PatronID"))));
+
+        }
+        public IActionResult Confirmation()
+        {
+            return View(_context.ShoppingCarts.Where(t => t.PatronID.Equals(HttpContext.Session.GetInt32("PatronID"))));
+
         }
 
         public IActionResult About()

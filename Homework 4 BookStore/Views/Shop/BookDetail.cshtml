@@ -1,8 +1,10 @@
 @model Homework_4_BookStore.Models.Book
-
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "BookDetail";
     Layout = "/Views/Shop/_ShopLayout.cshtml";
+   
+
 }
 
 <h2>BookDetail</h2>
@@ -14,7 +16,7 @@
         <img src="~/images/@Html.DisplayFor(model => model.Path)" alt="No photo" />
     </dd>
     <dt>
-        @Html.DisplayNameFor(model => model.Title)
+        @Html.DisplayNameFor(model => model.Title)       
     </dt>
     <dd>
         @Html.DisplayFor(model => model.Title)
