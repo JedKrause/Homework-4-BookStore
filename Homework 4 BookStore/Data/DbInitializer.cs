@@ -39,7 +39,7 @@ namespace Homework_4_BookStore.Data
                  new Book{BookID=5678,Title="The Fellowship of the Ring",Genre="Fantasy",Price=9.99M,Path="fotr.jpg"},
                  new Book{BookID=9101,Title="The Two Towers",Genre="Fantasy",Price=9.99M,Path="ttt.jpg"},
                  new Book{BookID=1121,Title="The Retun of the King",Genre="Fantasy",Price=9.99M,Path="rotk.jpg"},
-                 new Book{BookID=3141,Title="Silmarillion",Genre="Fantasy",Price=9.99M,Path="thesil.jpg"},
+                 new Book{BookID=3141,Title="Silmarillion",Genre="Fantasy, Historical Fantasy",Price=9.99M,Path="thesil.jpg"},
             };
             foreach (Book b in books)
             {
@@ -64,6 +64,15 @@ namespace Homework_4_BookStore.Data
             foreach (Rental r in rentals)
             {
                 context.Rentals.Add(r);
+            }
+            context.SaveChanges();
+            var shoppingcarts = new ShoppingCart[]
+            {
+                 new ShoppingCart{PatronID=1,BookID=1234,Price=9.99M,Title="The Hobbit",Qty=1,Path="thehob.jpg"},
+            };
+            foreach (ShoppingCart s in shoppingcarts)
+            {
+                context.ShoppingCarts.Add(s);
             }
             context.SaveChanges();
         }

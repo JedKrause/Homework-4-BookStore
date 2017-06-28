@@ -14,12 +14,14 @@ namespace Homework_4_BookStore.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<Patron> Patrons { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>().ToTable("Book");
             modelBuilder.Entity<Rental>().ToTable("Rental");
             modelBuilder.Entity<Patron>().ToTable("Patron");
+            modelBuilder.Entity<ShoppingCart>().ToTable("ShoppingCarts");
 
         }
 

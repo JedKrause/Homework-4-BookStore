@@ -87,9 +87,17 @@ namespace Homework_4_BookStore.Controllers
             return View(book);
         }
 
-        public IActionResult Cart()
+        public async Task<IActionResult> Cart()
         {
-            return View();
+            //int? id = HttpContext.Session.GetInt32("PatronID");
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //ShoppingCart shoppingcart[] = await _context.ShoppingCarts
+            //    .Select(sc => sc.PatronID == id);
+            return View(await _context.ShoppingCarts.ToListAsync());
         }
 
         public IActionResult Checkout()
@@ -116,6 +124,7 @@ namespace Homework_4_BookStore.Controllers
             HttpContext.Session.SetString("ValidUser", "true");
             HttpContext.Session.SetString("Username", DataPatron.FirstName + " " + DataPatron.LastName);
             HttpContext.Session.SetInt32("PermissionLevel", DataPatron.PermissionsLevel);
+            HttpContext.Session.SetInt32("PatronID", DataPatron.PatronID);
             return RedirectToAction("Buy");
             //if (ModelState.IsValid)
             //{
