@@ -12,6 +12,10 @@
     <Compile Remove="Migrations\20170606164119_LibraryInitial.cs" />
     <Compile Remove="Migrations\20170606164119_LibraryInitial.Designer.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\Homework4BookStoreJedKrause - Web Deploy.pubxml" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="3.3.7" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -29,6 +33,9 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>
